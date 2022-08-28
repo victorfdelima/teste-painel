@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+    prod:
+        build:
+            args:
+                user: www-data
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile.prod
+        ports: 
+            - "8080:9000"
+        image: vamoapp-prod
+        container_name: VamoApp-dev
+        restart: unless-stopped
+        working_dir: /var/www/dev.vamo.app.br
+        volumes:
+            - ./:/var/www/dev.vamo.app.br
+    # app:
+    #     build:
+    #         args:
+    #             user: www-data
+    #             # uid: 1000
+    #         context: ./
+    #         dockerfile: Dockerfile.dev
+    #     ports: 
+    #         - "8000:8000"
+    #     image: vamoapp-dev
+    #     container_name: VamoApp-dev
+    #     restart: unless-stopped
+    #     command: 'php artisan serve --host=0.0.0.0'
+    #     # working_dir: /var/www/dev.vamo.app.br
+    #     volumes:
+    #         - ./:/app
